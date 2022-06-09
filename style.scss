@@ -11,21 +11,49 @@ body {
 }
 button{
   padding: 5px 10px;
-  background: transparent;
   outline: none;
   cursor: pointer;
-  border: none;
+  border: 1px solid #1f829f;
+  background: #ffffff;
+  transition: all 0.4s;
+  border-radius: 15px;
+  font-size: 16px;
+  &:hover{
+    background: #1f829f;
+    border: 1px solid #000000;
+    color: #ffffff;
+  }
 }
+
+input{
+  outline: none;
+  padding: 10px 15px;
+  transition: all 0.4s;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  &:focus{
+    border: 1px solid #1f829f;
+  }
+}
+
 a{
   text-decoration: none;
   outline: none;
 }
 [class^="slide-"] {
-  border: 1px solid #000000;
+  border: 1px solid #c2c2c2;
+  border-radius: 10px;
   display: grid;
   place-items: center;
 }
-
+header{
+  padding: 10px 15px;
+  background: #91bec9;
+  color: #ffffff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 15px;
+}
 main{
   display: grid;
   gap: 20px;
@@ -78,22 +106,23 @@ main{
         flex-direction: column;
         margin-bottom: 10px;
       }
-      button{
-        border: 1px solid #000000;
-        border-radius: 15px;
-      }
     }
   }
   .slide-menu{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    .addSlide{
+      font-size: 16px;
+      margin-top: 10px;
+    }
     .slideList{
       display: flex;
       flex-direction: column;
       .slideMini{
         display: flex;
         margin-top: 15px;
+        cursor: pointer;
         p{
           font-size: 12px;
         }
@@ -101,8 +130,9 @@ main{
           width: 100px;
           height: 50px;
           border-radius: 10px;
-          border: 1px solid #2d2d2d;
+          border: 2px solid #2d2d2d;
           margin-left: 5px;
+          transition: all 0.4s;
         }
       }
       .activeMini{

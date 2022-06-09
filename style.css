@@ -11,19 +11,44 @@ body {
 
 button {
   padding: 5px 10px;
-  background: transparent;
   outline: none;
   cursor: pointer;
-  border: none; }
+  border: 1px solid #1f829f;
+  background: #ffffff;
+  transition: all 0.4s;
+  border-radius: 15px;
+  font-size: 16px; }
+  button:hover {
+    background: #1f829f;
+    border: 1px solid #000000;
+    color: #ffffff; }
+
+input {
+  outline: none;
+  padding: 10px 15px;
+  transition: all 0.4s;
+  border: 1px solid #000000;
+  border-radius: 15px; }
+  input:focus {
+    border: 1px solid #1f829f; }
 
 a {
   text-decoration: none;
   outline: none; }
 
 [class^="slide-"] {
-  border: 1px solid #000000;
+  border: 1px solid #c2c2c2;
+  border-radius: 10px;
   display: grid;
   place-items: center; }
+
+header {
+  padding: 10px 15px;
+  background: #91bec9;
+  color: #ffffff;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  margin-bottom: 15px; }
 
 main {
   display: grid;
@@ -69,27 +94,29 @@ main {
         display: flex;
         flex-direction: column;
         margin-bottom: 10px; }
-      main .slide-edit .options button {
-        border: 1px solid #000000;
-        border-radius: 15px; }
   main .slide-menu {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; }
+    main .slide-menu .addSlide {
+      font-size: 16px;
+      margin-top: 10px; }
     main .slide-menu .slideList {
       display: flex;
       flex-direction: column; }
       main .slide-menu .slideList .slideMini {
         display: flex;
-        margin-top: 15px; }
+        margin-top: 15px;
+        cursor: pointer; }
         main .slide-menu .slideList .slideMini p {
           font-size: 12px; }
         main .slide-menu .slideList .slideMini .pic {
           width: 100px;
           height: 50px;
           border-radius: 10px;
-          border: 1px solid #2d2d2d;
-          margin-left: 5px; }
+          border: 2px solid #2d2d2d;
+          margin-left: 5px;
+          transition: all 0.4s; }
       main .slide-menu .slideList .activeMini .pic {
         border-color: #1f829f; }
 
