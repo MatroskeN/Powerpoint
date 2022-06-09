@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  font-family: sans-serif;
+  font-size: 40px;
+  width: 100%;
+  min-height: 100vh; }
+
+button {
+  padding: 5px 10px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  border: none; }
+
+a {
+  text-decoration: none;
+  outline: none; }
+
+[class^="slide-"] {
+  border: 1px solid #000000;
+  display: grid;
+  place-items: center; }
+
+main {
+  display: grid;
+  gap: 20px;
+  height: 100vh;
+  grid-template-columns: 1fr 3fr 2fr; }
+  main .slide-main {
+    display: flex;
+    flex-direction: column;
+    padding: 75px 50px;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: #ffffff; }
+  main .slide-edit {
+    display: flex;
+    flex-direction: column;
+    padding: 75px 50px;
+    justify-content: flex-start;
+    align-items: flex-start; }
+    main .slide-edit .questionTitle {
+      font-size: 18px;
+      margin-bottom: 10px; }
+    main .slide-edit .addQuestion {
+      margin-top: 10px;
+      border: 1px solid #000000;
+      border-radius: 15px; }
+    main .slide-edit .options {
+      margin-top: 30px; }
+      main .slide-edit .options .optionsTitle {
+        font-size: 18px; }
+      main .slide-edit .options .optionItems {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px; }
+      main .slide-edit .options button {
+        border: 1px solid #000000;
+        border-radius: 15px; }
+  main .slideGraph {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; }
+    main .slideGraph .graphColumn {
+      display: flex;
+      flex-direction: column;
+      font-size: 16px; }
+      main .slideGraph .graphColumn .value {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #000; }
+
+/*# sourceMappingURL=style.css.map */

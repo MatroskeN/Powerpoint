@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        Презентация
+    </header>
+    <main>
+        <div class="slide-menu"></div>
+        <div class="slide-main">
+            <div class="slideTitle">
+                Вопрос
+            </div>
+            <div class="slideGraph">
+                <div class="graphColumn">
+                    <div class="value">0%</div>
+                    <div class="title">Имя</div>
+                </div>
+                <div class="graphColumn">
+                    <div class="value">0%</div>
+                    <div class="title">Имя</div>
+                </div>
+                <div class="graphColumn">
+                    <div class="value">0%</div>
+                    <div class="title">Имя</div>
+                </div>
+            </div>
+        </div>
+        <div class="slide-edit">
+            <label class="questionTitle" for="question">
+                Ваш вопрос
+            </label>
+            <input type="text" id="question" placeholder="Ваш вопрос...">
+            <button class="addQuestion" id="addQuestion">
+                Добавить вопрос
+            </button>
+            <div class="options">
+                <div class="optionsTitle">
+                    Опции
+                </div>
+                <div class="optionItems">
+                    <div class="optionItem">
+                        <input type="text" placeholder="Вариант">
+                    </div>
+                    <div class="optionItem">
+                        <input type="text" placeholder="Вариант">
+                    </div>
+                    <div class="optionItem">
+                        <input type="text" placeholder="Вариант">
+                    </div>
+                </div>
+                <button class="addOption">
+                    Добавить вариант
+                </button>
+                <button class="createGraph">
+                    Готово
+                </button>
+            </div>
+        </div>
+    </main>
+<script src="main.js"></script>
+</body>
+</html>
