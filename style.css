@@ -37,6 +37,17 @@ main {
     align-items: flex-start;
     justify-content: space-between;
     background: #ffffff; }
+    main .slide-main .slideGraph {
+      display: flex;
+      width: 100%;
+      justify-content: space-between; }
+      main .slide-main .slideGraph .graphColumn {
+        display: flex;
+        flex-direction: column;
+        font-size: 16px; }
+        main .slide-main .slideGraph .graphColumn .value {
+          margin-bottom: 10px;
+          border-bottom: 1px solid #000; }
   main .slide-edit {
     display: flex;
     flex-direction: column;
@@ -61,16 +72,25 @@ main {
       main .slide-edit .options button {
         border: 1px solid #000000;
         border-radius: 15px; }
-  main .slideGraph {
+  main .slide-menu {
     display: flex;
-    width: 100%;
-    justify-content: space-between; }
-    main .slideGraph .graphColumn {
+    flex-direction: column;
+    justify-content: flex-start; }
+    main .slide-menu .slideList {
       display: flex;
-      flex-direction: column;
-      font-size: 16px; }
-      main .slideGraph .graphColumn .value {
-        margin-bottom: 10px;
-        border-bottom: 1px solid #000; }
+      flex-direction: column; }
+      main .slide-menu .slideList .slideMini {
+        display: flex;
+        margin-top: 15px; }
+        main .slide-menu .slideList .slideMini p {
+          font-size: 12px; }
+        main .slide-menu .slideList .slideMini .pic {
+          width: 100px;
+          height: 50px;
+          border-radius: 10px;
+          border: 1px solid #2d2d2d;
+          margin-left: 5px; }
+      main .slide-menu .slideList .activeMini .pic {
+        border-color: #1f829f; }
 
 /*# sourceMappingURL=style.css.map */
