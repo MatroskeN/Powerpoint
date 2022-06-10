@@ -1,3 +1,5 @@
+window.Backend = "http://localhost:8085"
+
 //adding another option
 document.querySelector('.addOption').onclick = () => {
     let option = document.createElement('div');
@@ -5,6 +7,54 @@ document.querySelector('.addOption').onclick = () => {
     option.innerHTML = '<input type="text" placeholder="Вариант">'
     document.querySelector('.optionItems').appendChild(option);
 }
+
+// Получение презентации по id
+async function GetPresentation(presentationID){
+    return new Promise(async (resolve, reject) => {
+        await axios.get(window.Backend + '/api/presentation/' + presentationID)
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err))
+    })
+}
+
+async function SavePresentation(presentationID = null, activeSlide = null, presentationName = ""){
+    return new Promise(async (resolve, reject) => {
+        await axios.post(window.Backend + '/api/presentation/save', {
+            name: presentationName,
+            status: "active",
+            activeSlide: activeSlide,
+            presentationID: presentationID,
+            slides: [
+                {
+                    id: 1,
+                    question: "How many?",
+                    chartsId: 4,
+                    answers: [
+                        {
+                            id: 1,
+                            text: "Ты пидрs?"
+                        },
+                        {
+                            id: 2,
+                            text: "Он пидр?"
+                        },
+                        {
+                            id: 3,
+                            text: "Они пидр?"
+                        }
+                    ]
+                }
+            ]
+        })
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err))
+    })
+}
+
+
+GetPresentation(1).then((res) => {
+    console.log(res)
+})
 
 
 function NewSLide(id, title, chart) {
