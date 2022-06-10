@@ -96,6 +96,15 @@ main{
       border: 1px solid #000000;
       border-radius: 15px;
     }
+    .radioBtn{
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+      label{
+        font-size: 14px;
+        margin-left: 10px;
+      }
+    }
     .options{
       margin-top: 30px;
       .optionsTitle{

@@ -24,19 +24,8 @@
             <div class="slideTitle">
                 Вопрос
             </div>
-            <div class="slideGraph">
-                <div class="graphColumn">
-                    <div class="value">0%</div>
-                    <div class="title">Имя</div>
-                </div>
-                <div class="graphColumn">
-                    <div class="value">0%</div>
-                    <div class="title">Имя</div>
-                </div>
-                <div class="graphColumn">
-                    <div class="value">0%</div>
-                    <div class="title">Имя</div>
-                </div>
+            <div class="slideGraph" id="chart">
+
             </div>
         </div>
         <div class="slide-edit">
@@ -44,6 +33,14 @@
                 Ваш вопрос
             </label>
             <input type="text" id="question" placeholder="Ваш вопрос...">
+            <div class="radioBtn">
+                <input type="radio" name="chart" id="bar" checked>
+                <label for="bar">Столбчатая диаграмма</label>
+            </div>
+            <div class="radioBtn">
+                <input type="radio" name="chart" id="pie">
+                <label for="pie">Круговая диаграмма</label>
+            </div>
             <div class="options">
                 <div class="optionsTitle">
                     Опции
@@ -68,6 +65,7 @@
             </div>
         </div>
     </main>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="main.js"></script>
 </body>

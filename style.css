@@ -86,6 +86,13 @@ main {
       margin-top: 10px;
       border: 1px solid #000000;
       border-radius: 15px; }
+    main .slide-edit .radioBtn {
+      display: flex;
+      align-items: center;
+      margin-top: 15px; }
+      main .slide-edit .radioBtn label {
+        font-size: 14px;
+        margin-left: 10px; }
     main .slide-edit .options {
       margin-top: 30px; }
       main .slide-edit .options .optionsTitle {
