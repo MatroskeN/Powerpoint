@@ -1,6 +1,6 @@
 window.Backend = "http://localhost:8085"
 
-//adding another option
+// Добавить опцию
 document.querySelector('.addOption').onclick = () => {
     let option = document.createElement('div');
     option.className = 'optionItem';
@@ -17,7 +17,7 @@ async function GetPresentation(presentationID){
     })
 }
 
-async function SavePresentation(presentationID = null, activeSlide = null, presentationName = ""){
+async function SavePresentation(presentationID = null, activeSlide = null, presentationName = "", slides = []){
     return new Promise(async (resolve, reject) => {
         await axios.post(window.Backend + '/api/presentation/save', {
             name: presentationName,
@@ -52,9 +52,6 @@ async function SavePresentation(presentationID = null, activeSlide = null, prese
 }
 
 
-GetPresentation(1).then((res) => {
-    console.log(res)
-})
 
 
 function NewSLide(id, title, chart) {
@@ -67,6 +64,8 @@ let id = 1;
 let slideList = [];
 let index = 0;
 let activeSlideId;
+
+
 
 function addSlide() {
     let newGraph = new NewSLide(id);
@@ -139,6 +138,8 @@ document.querySelector('.createGraph').onclick = () => {
             element.chart.render();
         }
     })
+    console.log("Slides list" + slideList)
+    console.log("Active Slide" + activeSlideId)
 }
 
 function rewriteContent(id) {
@@ -151,20 +152,6 @@ function rewriteContent(id) {
                     box.removeChild(box.firstChild)
                 }
                 item.chart.render();
-                // let box = document.querySelector('.slideGraph');
-                // while (box.firstChild) {
-                //     box.removeChild(box.firstChild);
-                // }
-                // for (let i = 0; i < item.options.length; i++) {
-                //     console.log(item.options[i]);
-                //     let name = item.options[i];
-                //     if (name) {
-                //         let column = document.createElement('div');
-                //         column.className = 'graphColumn';
-                //         column.innerHTML = "<div class=\"value\">0%</div> <div class=\"title\">" + name + "</div>";
-                //         document.querySelector(".slideGraph").appendChild(column);
-                //     }
-                // }
             }
         } else {
             if (item.id === id) {
