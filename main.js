@@ -17,6 +17,7 @@ async function GetPresentation(presentationID){
     })
 }
 
+// Сохранение презентации
 async function SavePresentation(presentationID = null, activeSlide = null, presentationName = "", slides = []){
     return new Promise(async (resolve, reject) => {
         await axios.post(window.Backend + '/api/presentation/save', {
@@ -46,6 +47,18 @@ async function SavePresentation(presentationID = null, activeSlide = null, prese
                 }
             ]
         })
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err))
+    })
+}
+
+// Получить результаты для графиков
+async function GetChartsResult(id_slide, id_presentation){
+    return new Promise(async (resolve, reject) => {
+        await axios.post(window.Backend + '/api/results', {
+                id_slide: id_slide,
+                id_presentation: id_presentation
+            })
             .then((res) => resolve(res.data))
             .catch((err) => reject(err))
     })
