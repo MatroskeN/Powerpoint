@@ -108,19 +108,26 @@ document.querySelector('.addSlide').onclick = () => {
     rewriteContent(activeSlideId);
     clearFields();
 }
- const presentationId = null;
+ const presentationId = 1;
+let chart ='';
 
 document.querySelector('.createGraph').onclick = () => {
+    let options = '';
+    let pieOptions = '';
+    let optionsData = '';
+    let chartType = '';
+    let box = '';
+    let answers = [];
     slideList.forEach(element => {
         if (element.id === activeSlideId) {
             element.question = document.querySelector('#question').value;
             document.querySelector('.slideTitle').innerHTML = element.question;
 
-            let box = document.querySelector('#chart');
+            box = document.querySelector('#chart');
             while(box.firstChild){
                 box.removeChild(box.firstChild)
             }
-            let options = {
+            options = {
                 chart: {
                     type: 'bar'
                 },
@@ -132,17 +139,15 @@ document.querySelector('.createGraph').onclick = () => {
                     categories: []
                 }
             }
-            let pieOptions = {
+            pieOptions = {
                 chart: {
                     type: 'donut'
                 },
                 series: [],
                 labels: []
             }
-            let optionsData = document.querySelectorAll('.optionItem');
-            let chart;
-            let chartType;
-            let answers = [];
+            optionsData = document.querySelectorAll('.optionItem');
+            answers = [];
             for (let i = 0; i < optionsData.length; i++){
                 answers[i] = new NewAnswer();
                 answers[i].id = i;
@@ -169,10 +174,71 @@ document.querySelector('.createGraph').onclick = () => {
             element.answers = answers;
         }
     });
+    options = '';
+    pieOptions = '';
+    optionsData = '';
+    chart ='';
+    chartType = '';
+    box = '';
+    answers = [];
     SavePresentation(presentationId, activeSlideId, 'Презентация', slideList).then(r => {
         console.log(r);
     })
+    setTimeout( () => {
+        GetChartsResult(activeSlideId, presentationId).then(r => {
+            let newValues = r.data;
+            box = document.querySelector('#chart');
+            while(box.firstChild){
+                box.removeChild(box.firstChild)
+            }
+            options = {
+                chart: {
+                    type: 'bar'
+                },
+                series: [{
+                    name: 'sales',
+                    data: []
+                }],
+                xaxis: {
+                    categories: []
+                }
+            }
+            pieOptions = {
+                chart: {
+                    type: 'donut'
+                },
+                series: [],
+                labels: []
+            }
+            optionsData = document.querySelectorAll('.optionItem');
+            answers = [];
+            for (let i = 0; i < optionsData.length; i++){
+                answers[i] = new NewAnswer();
+                answers[i].id = i;
+                answers[i].text = optionsData[i].querySelector('input').value;
+            }
+            if (document.querySelector('#bar').checked){
+                for (let i = 0; i < newValues.length; i++){
+                    options.xaxis.categories.push(answers[i].text);
+                    options.series[0].data.push(newValues[i].x);
+                }
+                chart = new ApexCharts(document.querySelector("#chart"), options);
+                chartType = 'bar';
+            }
+            if (document.querySelector('#pie').checked){
+                for (let i = 0; i < newValues.length; i++){
+                    pieOptions.labels.push(answers[i].text);
+                    pieOptions.series.push(newValues[i].x);
+                }
+                chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
+                chartType = 'pie';
+            }
+            chart.render();
+        })
+    }, 500)
 }
+
+
 
 function rewriteContent(id) {
     slideList.forEach(item => {
