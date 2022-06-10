@@ -29,11 +29,11 @@ async function SavePresentation(presentationID = null, activeSlide = null, prese
                 {
                     id: 1,
                     question: "How many?",
-                    chartsId: 4,
+                    chartsId: 'bar',
                     answers: [
                         {
                             id: 1,
-                            text: "Ты пидрs?"
+                            text: "Ты пидр?"
                         },
                         {
                             id: 2,
@@ -67,10 +67,16 @@ async function GetChartsResult(id_slide, id_presentation){
 
 
 
-function NewSLide(id, title, chart) {
+function NewSLide(id, question, chartsID, answers) {
     this.id = id;
-    this.title = title;
-    this.chart = chart;
+    this.question = question;
+    this.chartsID = chartsID;
+    this.answers = answers;
+}
+
+function NewAnswer(id, text){
+    this.id = id;
+    this.text = text;
 }
 
 let id = 1;
@@ -102,12 +108,18 @@ document.querySelector('.addSlide').onclick = () => {
     rewriteContent(activeSlideId);
     clearFields();
 }
+ const presentationId = null;
 
 document.querySelector('.createGraph').onclick = () => {
     slideList.forEach(element => {
         if (element.id === activeSlideId) {
-            element.title = document.querySelector('#question').value;
-            document.querySelector('.slideTitle').innerHTML = element.title;
+            element.question = document.querySelector('#question').value;
+            document.querySelector('.slideTitle').innerHTML = element.question;
+
+            let box = document.querySelector('#chart');
+            while(box.firstChild){
+                box.removeChild(box.firstChild)
+            }
             let options = {
                 chart: {
                     type: 'bar'
@@ -127,44 +139,83 @@ document.querySelector('.createGraph').onclick = () => {
                 series: [],
                 labels: []
             }
-            let box = document.querySelector('#chart');
-            while(box.firstChild){
-                box.removeChild(box.firstChild)
-            }
             let optionsData = document.querySelectorAll('.optionItem');
             let chart;
+            let chartType;
+            let answers = [];
+            for (let i = 0; i < optionsData.length; i++){
+                answers[i] = new NewAnswer();
+                answers[i].id = i;
+                answers[i].text = optionsData[i].querySelector('input').value;
+            }
             if (document.querySelector('#bar').checked){
                 for (let i = 0; i < optionsData.length; i++){
-                    options.xaxis.categories.push(optionsData[i].querySelector('input').value);
+                    options.xaxis.categories.push(answers[i].text);
                     options.series[0].data.push(1+i);
                 }
                 chart = new ApexCharts(document.querySelector("#chart"), options);
+                chartType = 'bar';
             }
             if (document.querySelector('#pie').checked){
                 for (let i = 0; i < optionsData.length; i++){
-                    pieOptions.labels.push(optionsData[i].querySelector('input').value);
+                    pieOptions.labels.push(answers[i].text);
                     pieOptions.series.push(50);
                 }
                 chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
+                chartType = 'pie';
             }
-            element.chart = chart;
-            element.chart.render();
+            chart.render();
+            element.chartsID = chartType;
+            element.answers = answers;
         }
-    })
-    console.log("Slides list" + slideList)
-    console.log("Active Slide" + activeSlideId)
+    });
+    SavePresentation(presentationId, activeSlideId, 'Презентация', slideList)
 }
 
 function rewriteContent(id) {
     slideList.forEach(item => {
-        if (item.title) {
+        if (item.question) {
             if (item.id === id) {
-                document.querySelector('.slideTitle').innerHTML = item.title;
+                document.querySelector('.slideTitle').innerHTML = item.question;
                 let box = document.querySelector('#chart');
                 while(box.firstChild){
                     box.removeChild(box.firstChild)
                 }
-                item.chart.render();
+                let options = {
+                    chart: {
+                        type: 'bar'
+                    },
+                    series: [{
+                        name: 'sales',
+                        data: []
+                    }],
+                    xaxis: {
+                        categories: []
+                    }
+                }
+                let pieOptions = {
+                    chart: {
+                        type: 'donut'
+                    },
+                    series: [],
+                    labels: []
+                }
+                let chart;
+                if (item.chartsID === 'bar'){
+                    for (let i = 0; i < item.answers.length; i++){
+                        options.xaxis.categories.push(item.answers[i].text);
+                        options.series[0].data.push(1+i);
+                    }
+                    chart = new ApexCharts(document.querySelector("#chart"), options);
+                }
+                if (item.chartsID === 'pie'){
+                    for (let i = 0; i < item.answers.length; i++){
+                        pieOptions.labels.push(item.answers[i].text);
+                        pieOptions.series.push(50);
+                    }
+                    chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
+                }
+                chart.render();
             }
         } else {
             if (item.id === id) {
