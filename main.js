@@ -38,6 +38,7 @@ document.querySelector('.addSlide').onclick = () => {
     addSlide();
     renewSlides();
     rewriteContent(activeSlideId);
+    clearFields();
 }
 
 document.querySelector('.createGraph').onclick = () => {
@@ -102,6 +103,7 @@ function rewriteContent(id) {
             }
         }
     })
+    clearFields();
 }
 
 function renewSlides() {
@@ -118,3 +120,9 @@ function renewSlides() {
 
 
 renewSlides();
+
+function clearFields(){
+    document.querySelectorAll('input').forEach( element => {
+        element.value = '';
+    })
+}
