@@ -169,7 +169,9 @@ document.querySelector('.createGraph').onclick = () => {
             element.answers = answers;
         }
     });
-    SavePresentation(presentationId, activeSlideId, 'Презентация', slideList)
+    SavePresentation(presentationId, activeSlideId, 'Презентация', slideList).then(r => {
+        console.log(r);
+    })
 }
 
 function rewriteContent(id) {
