@@ -83,7 +83,7 @@ let id = 1;
 let slideList = [];
 let index = 0;
 let activeSlideId;
-
+let chart;
 
 
 function addSlide() {
@@ -109,7 +109,6 @@ document.querySelector('.addSlide').onclick = () => {
     clearFields();
 }
  const presentationId = 1;
-let chart ='';
 
 document.querySelector('.createGraph').onclick = () => {
     let options = '';
@@ -122,7 +121,6 @@ document.querySelector('.createGraph').onclick = () => {
         if (element.id === activeSlideId) {
             element.question = document.querySelector('#question').value;
             document.querySelector('.slideTitle').innerHTML = element.question;
-
             box = document.querySelector('#chart');
             while(box.firstChild){
                 box.removeChild(box.firstChild)
@@ -177,65 +175,12 @@ document.querySelector('.createGraph').onclick = () => {
     options = '';
     pieOptions = '';
     optionsData = '';
-    chart ='';
     chartType = '';
     box = '';
     answers = [];
     SavePresentation(presentationId, activeSlideId, 'Презентация', slideList).then(r => {
         console.log(r);
     })
-    setTimeout( () => {
-        GetChartsResult(activeSlideId, presentationId).then(r => {
-            let newValues = r.data;
-            box = document.querySelector('#chart');
-            while(box.firstChild){
-                box.removeChild(box.firstChild)
-            }
-            options = {
-                chart: {
-                    type: 'bar'
-                },
-                series: [{
-                    name: 'sales',
-                    data: []
-                }],
-                xaxis: {
-                    categories: []
-                }
-            }
-            pieOptions = {
-                chart: {
-                    type: 'donut'
-                },
-                series: [],
-                labels: []
-            }
-            optionsData = document.querySelectorAll('.optionItem');
-            answers = [];
-            for (let i = 0; i < optionsData.length; i++){
-                answers[i] = new NewAnswer();
-                answers[i].id = i;
-                answers[i].text = optionsData[i].querySelector('input').value;
-            }
-            if (document.querySelector('#bar').checked){
-                for (let i = 0; i < newValues.length; i++){
-                    options.xaxis.categories.push(answers[i].text);
-                    options.series[0].data.push(newValues[i].x);
-                }
-                chart = new ApexCharts(document.querySelector("#chart"), options);
-                chartType = 'bar';
-            }
-            if (document.querySelector('#pie').checked){
-                for (let i = 0; i < newValues.length; i++){
-                    pieOptions.labels.push(answers[i].text);
-                    pieOptions.series.push(newValues[i].x);
-                }
-                chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
-                chartType = 'pie';
-            }
-            chart.render();
-        })
-    }, 500)
 }
 
 
@@ -268,7 +213,6 @@ function rewriteContent(id) {
                     series: [],
                     labels: []
                 }
-                let chart;
                 if (item.chartsID === 'bar'){
                     for (let i = 0; i < item.answers.length; i++){
                         options.xaxis.categories.push(item.answers[i].text);
