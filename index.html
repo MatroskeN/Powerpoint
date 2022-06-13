@@ -7,40 +7,48 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <header>
+<header>
+    <h1>
         Презентация
-    </header>
-    <main>
-        <div class="slide-menu">
-            <button class="addSlide">
-                Добавить слайд
-            </button>
-            <div class="slideList">
-            </div>
+    </h1>
+</header>
+<main>
+    <div class="slide-menu">
+        <button type="button" class="btn btn-primary addSlide">
+            Добавить слайд
+        </button>
+        <div class="slideList">
         </div>
-        <div class="slide-main activeSlide">
-            <div class="slideTitle">
-                Вопрос
-            </div>
-            <div class="slideGraph" id="chart">
+    </div>
+    <div class="slide-main activeSlide">
+        <div class="slideTitle">
+            Вопрос
+        </div>
+        <div class="slideGraph" id="chart">
 
-            </div>
         </div>
-        <div class="slide-edit">
+    </div>
+    <div class="slide-edit">
+        <form action="">
             <label class="questionTitle" for="question">
                 Ваш вопрос
             </label>
-            <input type="text" id="question" placeholder="Ваш вопрос...">
-            <div class="radioBtn">
-                <input type="radio" class="radio" name="chart" id="bar" checked>
-                <label for="bar">Столбчатая диаграмма</label>
+            <input type="text" class="form-control" id="question" placeholder="Ваш вопрос...">
+            <div class="form-check radioBtn">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bar" checked>
+                <label class="form-check-label" for="bar">
+                    Столбчатая диаграмма
+                </label>
             </div>
-            <div class="radioBtn">
-                <input type="radio" class="radio" name="chart" id="pie">
-                <label for="pie">Круговая диаграмма</label>
+            <div class="form-check radioBtn">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="pie">
+                <label class="form-check-label" for="pie">
+                    Круговая диаграмма
+                </label>
             </div>
             <div class="options">
                 <div class="optionsTitle">
@@ -48,26 +56,23 @@
                 </div>
                 <div class="optionItems">
                     <div class="optionItem">
-                        <input type="text" placeholder="Вариант">
-                    </div>
-                    <div class="optionItem">
-                        <input type="text" placeholder="Вариант">
-                    </div>
-                    <div class="optionItem">
-                        <input type="text" placeholder="Вариант">
+                        <input class="form-control" type="text" placeholder="Вариант">
                     </div>
                 </div>
-                <button class="addOption">
+                <button type="button" class="btn btn-primary addOption">
                     Добавить вариант
                 </button>
-                <button class="createGraph">
+                <button type="button" class="btn btn-primary createGraph">
                     Готово
                 </button>
             </div>
-        </div>
-    </main>
+        </form>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="main.js"></script>
 </body>
 </html>

@@ -9,43 +9,18 @@ body {
   width: 100%;
   min-height: 100vh; }
 
-button {
-  padding: 5px 10px;
-  outline: none;
-  cursor: pointer;
-  border: 1px solid #1f829f;
-  background: #ffffff;
-  transition: all 0.4s;
-  border-radius: 15px;
-  font-size: 16px; }
-  button:hover {
-    background: #1f829f;
-    border: 1px solid #000000;
-    color: #ffffff; }
-
-input {
-  outline: none;
-  padding: 10px 15px;
-  transition: all 0.4s;
-  border: 1px solid #000000;
-  border-radius: 15px; }
-  input:focus {
-    border: 1px solid #1f829f; }
-
 a {
   text-decoration: none;
   outline: none; }
 
 [class^="slide-"] {
-  border: 1px solid #c2c2c2;
-  border-radius: 10px;
   display: grid;
   place-items: center; }
 
 header {
   padding: 10px 15px;
-  background: #91bec9;
-  color: #ffffff;
+  background: silver;
+  color: #000000;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   margin-bottom: 15px; }
@@ -61,18 +36,18 @@ main {
     padding: 75px 50px;
     align-items: flex-start;
     justify-content: space-between;
-    background: #ffffff; }
+    border: 1px solid #c2c2c2;
+    border-radius: 10px;
+    background: #f5f4f4; }
+    main .slide-main .slideTitle {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 30px; }
     main .slide-main .slideGraph {
       display: flex;
       width: 100%;
-      justify-content: space-between; }
-      main .slide-main .slideGraph .graphColumn {
-        display: flex;
-        flex-direction: column;
-        font-size: 16px; }
-        main .slide-main .slideGraph .graphColumn .value {
-          margin-bottom: 10px;
-          border-bottom: 1px solid #000; }
+      justify-content: space-between;
+      background: #ffffff; }
   main .slide-edit {
     display: flex;
     flex-direction: column;
@@ -101,12 +76,13 @@ main {
         display: flex;
         flex-direction: column;
         margin-bottom: 10px; }
+        main .slide-edit .options .optionItems .optionItem {
+          margin-top: 10px; }
   main .slide-menu {
     display: flex;
     flex-direction: column;
     justify-content: flex-start; }
     main .slide-menu .addSlide {
-      font-size: 16px;
       margin-top: 10px; }
     main .slide-menu .slideList {
       display: flex;

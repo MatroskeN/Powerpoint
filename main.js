@@ -4,7 +4,7 @@ window.Backend = "http://localhost:8085"
 document.querySelector('.addOption').onclick = () => {
     let option = document.createElement('div');
     option.className = 'optionItem';
-    option.innerHTML = '<input type="text" placeholder="Вариант">'
+    option.innerHTML = '<input class="form-control" type="text" placeholder="Вариант">'
     document.querySelector('.optionItems').appendChild(option);
 }
 
@@ -186,6 +186,8 @@ document.querySelector('.createGraph').onclick = () => {
 
 
 function rewriteContent(id) {
+    chart.destroy();
+    console.log(chart);
     slideList.forEach(item => {
         if (item.question) {
             if (item.id === id) {
