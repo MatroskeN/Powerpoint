@@ -1,11 +1,14 @@
 window.Backend = "http://localhost:8085"
 
 // Добавить опцию
-document.querySelector('.addOption').onclick = () => {
+function addOption(){
     let option = document.createElement('div');
     option.className = 'optionItem';
     option.innerHTML = '<input class="form-control" type="text" placeholder="Вариант">'
     document.querySelector('.optionItems').appendChild(option);
+}
+document.querySelector('.addOption').onclick = () => {
+    addOption();
 }
 
 // Получение презентации по id
@@ -113,6 +116,7 @@ document.querySelector('.addSlide').onclick = () => {
 document.querySelector('.createGraph').onclick = () => {
     let options = '';
     let pieOptions = '';
+    let areaOptions = '';
     let optionsData = '';
     let chartType = '';
     let box = '';
@@ -144,6 +148,32 @@ document.querySelector('.createGraph').onclick = () => {
                 series: [],
                 labels: []
             }
+            areaOptions = {
+                chart: {
+                    type: "area"
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                series: [
+                    {
+                        name: "Series 1",
+                        data: []
+                    }
+                ],
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.9,
+                        stops: [0, 90, 100]
+                    }
+                },
+                xaxis: {
+                    categories: []
+                }
+            }
             optionsData = document.querySelectorAll('.optionItem');
             answers = [];
             for (let i = 0; i < optionsData.length; i++){
@@ -167,6 +197,14 @@ document.querySelector('.createGraph').onclick = () => {
                 chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
                 chartType = 'pie';
             }
+            if (document.querySelector('#area').checked){
+                for (let i = 0; i < optionsData.length; i++){
+                    areaOptions.xaxis.categories.push(answers[i].text);
+                    areaOptions.series[0].data.push(1+i);
+                }
+                chart = new ApexCharts(document.querySelector('#chart'), areaOptions);
+                chartType = 'area';
+            }
             chart.render();
             element.chartsID = chartType;
             element.answers = answers;
@@ -174,6 +212,7 @@ document.querySelector('.createGraph').onclick = () => {
     });
     options = '';
     pieOptions = '';
+    areaOptions = '';
     optionsData = '';
     chartType = '';
     box = '';
@@ -186,8 +225,13 @@ document.querySelector('.createGraph').onclick = () => {
 
 
 function rewriteContent(id) {
-    chart.destroy();
-    console.log(chart);
+    if (chart) {
+        chart.destroy();
+    }
+    let answerInputs = document.querySelector('.optionItems');
+    while(answerInputs.firstChild){
+        answerInputs.removeChild(answerInputs.firstChild);
+    }
     slideList.forEach(item => {
         if (item.question) {
             if (item.id === id) {
@@ -195,6 +239,10 @@ function rewriteContent(id) {
                 let box = document.querySelector('#chart');
                 while(box.firstChild){
                     box.removeChild(box.firstChild)
+                }
+
+                for (let i = 0; i < item.answers.length; i++){
+                    addOption();
                 }
                 let options = {
                     chart: {
@@ -215,6 +263,32 @@ function rewriteContent(id) {
                     series: [],
                     labels: []
                 }
+                let areaOptions = {
+                    chart: {
+                        type: "area"
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    series: [
+                        {
+                            name: "Series 1",
+                            data: []
+                        }
+                    ],
+                    fill: {
+                        type: "gradient",
+                        gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                            stops: [0, 90, 100]
+                        }
+                    },
+                    xaxis: {
+                        categories: []
+                    }
+                }
                 if (item.chartsID === 'bar'){
                     for (let i = 0; i < item.answers.length; i++){
                         options.xaxis.categories.push(item.answers[i].text);
@@ -228,6 +302,13 @@ function rewriteContent(id) {
                         pieOptions.series.push(50);
                     }
                     chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
+                }
+                if (item.chartsID === 'area'){
+                    for (let i = 0; i < item.answers.length; i++){
+                        areaOptions.xaxis.categories.push(item.answers[i].text);
+                        areaOptions.series[0].data.push(1+i);
+                    }
+                    chart = new ApexCharts(document.querySelector("#chart"), areaOptions);
                 }
                 chart.render();
             }
@@ -250,8 +331,6 @@ function renewSlides() {
         let activeID = $(this).find('.number').data('id');
         activeSlideId = activeID;
         rewriteContent(activeID);
-        // $(existingSlides).removeClass('activeMini');
-        // $(this).addClass('activeMini');
     })
 }
 
