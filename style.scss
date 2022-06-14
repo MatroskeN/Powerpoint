@@ -20,29 +20,33 @@ a{
 }
 header{
   padding: 10px 15px;
-  background: silver;
-  color: #000000;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  margin-bottom: 15px;
+  background: #ffffff;
+  font-family: Arial, serif;
+  color: rgba(40,46,62, 0.6);
+  -webkit-box-shadow: 0px 9px 5px -5px rgba(34, 60, 80, 0.6);
+  -moz-box-shadow: 0px 9px 5px -5px rgba(34, 60, 80, 0.6);
+  box-shadow: 0px 9px 5px -5px rgba(34, 60, 80, 0.6);
+  z-index: 1;
+  position: relative;
 }
 main{
   display: grid;
-  gap: 20px;
+  gap: 0;
   height: 100vh;
   grid-template-columns: 1fr 3fr 2fr;
+  z-index: 0;
+  position: relative;
   .slide-main{
     display: flex;
     flex-direction: column;
     padding: 75px 50px;
     align-items: flex-start;
     justify-content: space-between;
-    border: 1px solid #c2c2c2;
-    border-radius: 10px;
     background: #f5f4f4;
     .slideTitle{
+      font-family: Arial, serif;
         font-size: 36px;
-        font-weight: 600;
+        font-weight: 400;
       margin-bottom: 30px;
     }
     .slideGraph{
@@ -53,6 +57,7 @@ main{
     }
   }
   .slide-edit{
+    font-family: Arial, serif;
     display: flex;
     flex-direction: column;
     padding: 75px 50px;
@@ -75,6 +80,11 @@ main{
       label{
         font-size: 14px;
         margin-left: 10px;
+        cursor: pointer;
+        margin-top: 3px;
+      }
+      input{
+        cursor: pointer;
       }
     }
     .options{
@@ -102,23 +112,31 @@ main{
     .slideList{
       display: flex;
       flex-direction: column;
+      width: 100%;
       .slideMini{
         display: flex;
         margin-top: 15px;
         cursor: pointer;
+        width: 100%;
+        justify-content: center;
+        background: #ffffff;
+        padding: 15px 0;
+        transition: all 0.4s;
         p{
           font-size: 12px;
         }
         .pic{
-          width: 100px;
-          height: 50px;
+          width: 150px;
+          height: 70px;
           border-radius: 10px;
-          border: 2px solid #2d2d2d;
-          margin-left: 5px;
+          border: 1px solid #c4c4c4;
+          background: #fff;
+          margin-left: 10px;
           transition: all 0.4s;
         }
       }
       .activeMini{
+        background: #a9d0dc;
         .pic{
           border-color: #1f829f;
         }

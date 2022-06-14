@@ -250,11 +250,23 @@ function renewSlides() {
         let activeID = $(this).find('.number').data('id');
         activeSlideId = activeID;
         rewriteContent(activeID);
-        $(existingSlides).removeClass('activeMini');
-        $(this).addClass('activeMini');
+        // $(existingSlides).removeClass('activeMini');
+        // $(this).addClass('activeMini');
     })
 }
 
+let checkActive = () => {
+    existingSlides = document.querySelectorAll('.slideMini');
+    existingSlides.forEach(element => {
+        let thisID = $(element).find('.number').data('id');
+        if (thisID === activeSlideId){
+            $(existingSlides).removeClass('activeMini');
+            $(element).addClass('activeMini');
+        }
+    })
+}
+
+let checkInterval = setInterval(()=> checkActive(), 100);
 
 renewSlides();
 
