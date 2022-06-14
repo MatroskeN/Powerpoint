@@ -1,3 +1,4 @@
+@import "trash.css";
 * {
   margin: 0;
   padding: 0;
@@ -122,8 +123,17 @@ main{
         background: #ffffff;
         padding: 15px 0;
         transition: all 0.4s;
-        p{
-          font-size: 12px;
+        .info{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          p{
+            font-size: 12px;
+          }
+          button{
+            border: none;
+            background: transparent;
+          }
         }
         .pic{
           width: 150px;
