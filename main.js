@@ -114,9 +114,12 @@ document.querySelector('.addSlide').onclick = () => {
  const presentationId = 1;
 
 document.querySelector('.createGraph').onclick = () => {
+    let chosenOptions = '';
     let options = '';
     let pieOptions = '';
     let areaOptions = '';
+    let radarOptions = '';
+    let polarOptions = '';
     let optionsData = '';
     let chartType = '';
     let box = '';
@@ -174,6 +177,32 @@ document.querySelector('.createGraph').onclick = () => {
                     categories: []
                 }
             }
+            radarOptions = {
+                series: [{
+                    name: 'Series 1',
+                    data: [],
+                }],
+                chart: {
+                    height: 350,
+                    type: 'radar',
+                },
+                xaxis: {
+                    categories: []
+                }
+            }
+            polarOptions = {
+                series: [],
+                labels: [],
+                chart: {
+                    type: 'polarArea',
+                },
+                stroke: {
+                    colors: ['#fff']
+                },
+                fill: {
+                    opacity: 0.8
+                }
+            }
             optionsData = document.querySelectorAll('.optionItem');
             answers = [];
             for (let i = 0; i < optionsData.length; i++){
@@ -186,15 +215,15 @@ document.querySelector('.createGraph').onclick = () => {
                     options.xaxis.categories.push(answers[i].text);
                     options.series[0].data.push(1+i);
                 }
-                chart = new ApexCharts(document.querySelector("#chart"), options);
+                chosenOptions = options;
                 chartType = 'bar';
             }
             if (document.querySelector('#pie').checked){
                 for (let i = 0; i < optionsData.length; i++){
                     pieOptions.labels.push(answers[i].text);
-                    pieOptions.series.push(50);
+                    pieOptions.series.push(1+i);
                 }
-                chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
+                chosenOptions = pieOptions;
                 chartType = 'pie';
             }
             if (document.querySelector('#area').checked){
@@ -202,9 +231,26 @@ document.querySelector('.createGraph').onclick = () => {
                     areaOptions.xaxis.categories.push(answers[i].text);
                     areaOptions.series[0].data.push(1+i);
                 }
-                chart = new ApexCharts(document.querySelector('#chart'), areaOptions);
+                chosenOptions = areaOptions;
                 chartType = 'area';
             }
+            if (document.querySelector('#radar').checked){
+                for (let i = 0; i< optionsData.length; i++){
+                    radarOptions.xaxis.categories.push(answers[i].text);
+                    radarOptions.series[0].data.push(1+i);
+                }
+                chosenOptions = radarOptions;
+                chartType = 'radar';
+            }
+            if (document.querySelector('#polar').checked){
+                for (let i = 0; i< optionsData.length; i++){
+                    polarOptions.labels.push(answers[i].text);
+                    polarOptions.series.push(1+i);
+                }
+                chosenOptions = polarOptions;
+                chartType = 'polar';
+            }
+            chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
             chart.render();
             element.chartsID = chartType;
             element.answers = answers;
@@ -213,6 +259,8 @@ document.querySelector('.createGraph').onclick = () => {
     options = '';
     pieOptions = '';
     areaOptions = '';
+    radarOptions = '';
+    polarOptions = '';
     optionsData = '';
     chartType = '';
     box = '';
@@ -244,6 +292,7 @@ function rewriteContent(id) {
                 for (let i = 0; i < item.answers.length; i++){
                     addOption();
                 }
+                let chosenOptions = '';
                 let options = {
                     chart: {
                         type: 'bar'
@@ -289,27 +338,68 @@ function rewriteContent(id) {
                         categories: []
                     }
                 }
+                let radarOptions = {
+                    series: [{
+                        name: 'Series 1',
+                        data: [],
+                    }],
+                    chart: {
+                        height: 350,
+                        type: 'radar',
+                    },
+                    xaxis: {
+                        categories: []
+                    }
+                }
+                let polarOptions = {
+                    series: [],
+                    labels: [],
+                    chart: {
+                        type: 'polarArea',
+                    },
+                    stroke: {
+                        colors: ['#fff']
+                    },
+                    fill: {
+                        opacity: 0.8
+                    }
+                }
                 if (item.chartsID === 'bar'){
                     for (let i = 0; i < item.answers.length; i++){
                         options.xaxis.categories.push(item.answers[i].text);
                         options.series[0].data.push(1+i);
                     }
-                    chart = new ApexCharts(document.querySelector("#chart"), options);
+                    chosenOptions = options;
                 }
                 if (item.chartsID === 'pie'){
                     for (let i = 0; i < item.answers.length; i++){
                         pieOptions.labels.push(item.answers[i].text);
-                        pieOptions.series.push(50);
+                        pieOptions.series.push(1+i);
                     }
-                    chart = new ApexCharts(document.querySelector("#chart"), pieOptions);
+                    chosenOptions = pieOptions;
                 }
                 if (item.chartsID === 'area'){
                     for (let i = 0; i < item.answers.length; i++){
                         areaOptions.xaxis.categories.push(item.answers[i].text);
                         areaOptions.series[0].data.push(1+i);
                     }
-                    chart = new ApexCharts(document.querySelector("#chart"), areaOptions);
+                    chosenOptions = areaOptions;
                 }
+                if (item.chartsID === 'radar'){
+                    for (let i = 0; i < item.answers.length; i++){
+                        radarOptions.xaxis.categories.push(item.answers[i].text);
+                        radarOptions.series[0].data.push(1+i);
+                    }
+                    chosenOptions = radarOptions;
+                }
+                if (item.chartsID === 'polar'){
+                    for (let i = 0; i< item.answers.length; i++){
+                        polarOptions.labels.push(item.answers[i].text);
+                        polarOptions.series.push(1+i);
+                    }
+                    chosenOptions = polarOptions;
+                }
+                chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
                 chart.render();
             }
         } else {
