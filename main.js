@@ -1,5 +1,15 @@
 window.Backend = "http://localhost:8085"
 
+$('h1').on('click', function (){
+    window.location.replace("index.html");
+})
+$('.authorization').on('click', function (){
+    window.location.replace("authorization.html");
+})
+$('.registration').on('click', function (){
+    window.location.replace("registration.html");
+})
+
 // Добавить опцию
 function addOption() {
     let option = document.createElement('div');

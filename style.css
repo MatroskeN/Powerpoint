@@ -21,13 +21,22 @@ a {
 header {
   padding: 10px 15px;
   background: #ffffff;
-  font-family: Arial, serif;
-  color: rgba(40, 46, 62, 0.6);
   -webkit-box-shadow: 0px 9px 5px -5px rgba(34, 60, 80, 0.6);
   -moz-box-shadow: 0px 9px 5px -5px rgba(34, 60, 80, 0.6);
   box-shadow: 0px 9px 5px -5px rgba(34, 60, 80, 0.6);
   z-index: 1;
-  position: relative; }
+  position: relative;
+  display: flex;
+  justify-content: space-between; }
+  header h1 {
+    font-family: Arial, serif;
+    color: rgba(40, 46, 62, 0.6);
+    cursor: pointer; }
+  header .buttons {
+    display: flex;
+    align-items: center; }
+    header .buttons button:first-of-type {
+      margin-right: 10px; }
 
 main {
   display: grid;
@@ -128,5 +137,13 @@ main {
         background: #a9d0dc; }
         main .slide-menu .slideList .activeMini .pic {
           border-color: #1f829f; }
+
+.mainLogin {
+  display: flex;
+  justify-content: center; }
+  .mainLogin .loginForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px; }
 
 /*# sourceMappingURL=style.css.map */
