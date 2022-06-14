@@ -39,9 +39,9 @@ main{
   .slide-main{
     display: flex;
     flex-direction: column;
-    padding: 75px 50px;
+    padding: 50px 50px;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: flex-start;
     background: #f5f4f4;
     .slideTitle{
       font-family: Arial, serif;
