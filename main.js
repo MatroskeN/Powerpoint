@@ -1,12 +1,12 @@
 window.Backend = "http://localhost:8085"
 
-$('h1').on('click', function (){
+$('h1').on('click', function () {
     window.location.replace("index.html");
 })
-$('.authorization').on('click', function (){
+$('.authorization').on('click', function () {
     window.location.replace("authorization.html");
 })
-$('.registration').on('click', function (){
+$('.registration').on('click', function () {
     window.location.replace("registration.html");
 })
 
@@ -122,6 +122,39 @@ document.querySelector('.addSlide').onclick = () => {
 }
 const presentationId = 1;
 
+function doAlert(checkboxElem){
+    console.log('change')
+    if (checkboxElem.checked){
+        document.querySelector('.options').style.display = 'none';
+        document.querySelector('.upload').style.display = 'flex';
+    }
+}
+
+$('input[type=radio]').on('click',function (){
+    if ($(this).id !== 'image'){
+        document.querySelector('.options').style.display = 'block';
+        document.querySelector('.upload').style.display = 'none';
+    }
+})
+
+let loadFile = function (event){
+    let slidePic = document.createElement('div');
+    slidePic.className = 'slidePic';
+    slidePic.innerHTML = '<img src="" id="output" alt="picture">'
+    document.querySelector('#chart').appendChild(slidePic)
+    let image = document.querySelector('#output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+    document.querySelector('.slideTitle').innerHTML = document.querySelector('#question').value;
+    let answers = [];
+    answers[0] = new NewAnswer();
+    answers[0].id = 0;
+    answers[0].text = URL.createObjectURL(event.target.files[0]);
+    console.log(answers);
+    slideList[activeSlideId-1].answers = answers;
+    slideList[activeSlideId-1].chartsID = 'image';
+    slideList[activeSlideId-1].question = document.querySelector('#question').value;
+}
+
 document.querySelector('.createGraph').onclick = () => {
     let chosenOptions = '';
     let options = '';
@@ -214,53 +247,53 @@ document.querySelector('.createGraph').onclick = () => {
             }
             optionsData = document.querySelectorAll('.optionItem');
             answers = [];
-            for (let i = 0; i < optionsData.length; i++) {
-                answers[i] = new NewAnswer();
-                answers[i].id = i;
-                answers[i].text = optionsData[i].querySelector('input').value;
-            }
-            if (document.querySelector('#bar').checked) {
                 for (let i = 0; i < optionsData.length; i++) {
-                    options.xaxis.categories.push(answers[i].text);
-                    options.series[0].data.push(1 + i);
+                    answers[i] = new NewAnswer();
+                    answers[i].id = i;
+                    answers[i].text = optionsData[i].querySelector('input').value;
                 }
-                chosenOptions = options;
-                chartType = 'bar';
-            }
-            if (document.querySelector('#pie').checked) {
-                for (let i = 0; i < optionsData.length; i++) {
-                    pieOptions.labels.push(answers[i].text);
-                    pieOptions.series.push(1 + i);
+                if (document.querySelector('#bar').checked) {
+                    for (let i = 0; i < optionsData.length; i++) {
+                        options.xaxis.categories.push(answers[i].text);
+                        options.series[0].data.push(1 + i);
+                    }
+                    chosenOptions = options;
+                    chartType = 'bar';
                 }
-                chosenOptions = pieOptions;
-                chartType = 'pie';
-            }
-            if (document.querySelector('#area').checked) {
-                for (let i = 0; i < optionsData.length; i++) {
-                    areaOptions.xaxis.categories.push(answers[i].text);
-                    areaOptions.series[0].data.push(1 + i);
+                if (document.querySelector('#pie').checked) {
+                    for (let i = 0; i < optionsData.length; i++) {
+                        pieOptions.labels.push(answers[i].text);
+                        pieOptions.series.push(1 + i);
+                    }
+                    chosenOptions = pieOptions;
+                    chartType = 'pie';
                 }
-                chosenOptions = areaOptions;
-                chartType = 'area';
-            }
-            if (document.querySelector('#radar').checked) {
-                for (let i = 0; i < optionsData.length; i++) {
-                    radarOptions.xaxis.categories.push(answers[i].text);
-                    radarOptions.series[0].data.push(1 + i);
+                if (document.querySelector('#area').checked) {
+                    for (let i = 0; i < optionsData.length; i++) {
+                        areaOptions.xaxis.categories.push(answers[i].text);
+                        areaOptions.series[0].data.push(1 + i);
+                    }
+                    chosenOptions = areaOptions;
+                    chartType = 'area';
                 }
-                chosenOptions = radarOptions;
-                chartType = 'radar';
-            }
-            if (document.querySelector('#polar').checked) {
-                for (let i = 0; i < optionsData.length; i++) {
-                    polarOptions.labels.push(answers[i].text);
-                    polarOptions.series.push(1 + i);
+                if (document.querySelector('#radar').checked) {
+                    for (let i = 0; i < optionsData.length; i++) {
+                        radarOptions.xaxis.categories.push(answers[i].text);
+                        radarOptions.series[0].data.push(1 + i);
+                    }
+                    chosenOptions = radarOptions;
+                    chartType = 'radar';
                 }
-                chosenOptions = polarOptions;
-                chartType = 'polar';
-            }
-            chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
-            chart.render();
+                if (document.querySelector('#polar').checked) {
+                    for (let i = 0; i < optionsData.length; i++) {
+                        polarOptions.labels.push(answers[i].text);
+                        polarOptions.series.push(1 + i);
+                    }
+                    chosenOptions = polarOptions;
+                    chartType = 'polar';
+                }
+                chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
+                chart.render();
             element.chartsID = chartType;
             element.answers = answers;
         }
@@ -288,138 +321,153 @@ function rewriteContent(id) {
     while (answerInputs.firstChild) {
         answerInputs.removeChild(answerInputs.firstChild);
     }
-    slideList.forEach(item => {
-        if (item.question) {
-            if (item.id === id) {
-                document.querySelector('.slideTitle').innerHTML = item.question;
-                let box = document.querySelector('#chart');
-                while (box.firstChild) {
-                    box.removeChild(box.firstChild)
-                }
+    let box = document.querySelector('#chart');
+    while (box.firstChild) {
+        box.removeChild(box.firstChild);
+    }
+    if (slideList[activeSlideId-1].chartsID === 'image'){
+        document.querySelector('.slideTitle').innerHTML = slideList[activeSlideId-1].question;
+        let slidePic = document.createElement('div');
+        slidePic.className = 'slidePic';
+        slidePic.innerHTML = '<img src="" id="output" alt="picture">'
+        document.querySelector('#chart').appendChild(slidePic)
+        let image = document.querySelector('#output');
+        image.src = slideList[activeSlideId-1].answers[0].text;
+    } else {
+        slideList.forEach(item => {
+            if (item.question) {
+                if (item.id === id) {
+                    document.querySelector('.slideTitle').innerHTML = item.question;
+                    let box = document.querySelector('#chart');
+                    while (box.firstChild) {
+                        box.removeChild(box.firstChild)
+                    }
 
-                for (let i = 0; i < item.answers.length; i++) {
-                    addOption();
-                }
-                let chosenOptions = '';
-                let options = {
-                    chart: {
-                        type: 'bar'
-                    },
-                    series: [{
-                        name: 'sales',
-                        data: []
-                    }],
-                    xaxis: {
-                        categories: []
+                    for (let i = 0; i < item.answers.length; i++) {
+                        addOption();
                     }
-                }
-                let pieOptions = {
-                    chart: {
-                        type: 'donut'
-                    },
-                    series: [],
-                    labels: []
-                }
-                let areaOptions = {
-                    chart: {
-                        type: "area"
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    series: [
-                        {
-                            name: "Series 1",
+                    let chosenOptions = '';
+                    let options = {
+                        chart: {
+                            type: 'bar'
+                        },
+                        series: [{
+                            name: 'sales',
                             data: []
+                        }],
+                        xaxis: {
+                            categories: []
                         }
-                    ],
-                    fill: {
-                        type: "gradient",
-                        gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.7,
-                            opacityTo: 0.9,
-                            stops: [0, 90, 100]
+                    }
+                    let pieOptions = {
+                        chart: {
+                            type: 'donut'
+                        },
+                        series: [],
+                        labels: []
+                    }
+                    let areaOptions = {
+                        chart: {
+                            type: "area"
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        series: [
+                            {
+                                name: "Series 1",
+                                data: []
+                            }
+                        ],
+                        fill: {
+                            type: "gradient",
+                            gradient: {
+                                shadeIntensity: 1,
+                                opacityFrom: 0.7,
+                                opacityTo: 0.9,
+                                stops: [0, 90, 100]
+                            }
+                        },
+                        xaxis: {
+                            categories: []
                         }
-                    },
-                    xaxis: {
-                        categories: []
                     }
-                }
-                let radarOptions = {
-                    series: [{
-                        name: 'Series 1',
-                        data: [],
-                    }],
-                    chart: {
-                        height: 350,
-                        type: 'radar',
-                    },
-                    xaxis: {
-                        categories: []
+                    let radarOptions = {
+                        series: [{
+                            name: 'Series 1',
+                            data: [],
+                        }],
+                        chart: {
+                            height: 350,
+                            type: 'radar',
+                        },
+                        xaxis: {
+                            categories: []
+                        }
                     }
-                }
-                let polarOptions = {
-                    series: [],
-                    labels: [],
-                    chart: {
-                        type: 'polarArea',
-                    },
-                    stroke: {
-                        colors: ['#fff']
-                    },
-                    fill: {
-                        opacity: 0.8
+                    let polarOptions = {
+                        series: [],
+                        labels: [],
+                        chart: {
+                            type: 'polarArea',
+                        },
+                        stroke: {
+                            colors: ['#fff']
+                        },
+                        fill: {
+                            opacity: 0.8
+                        }
                     }
-                }
-                if (item.chartsID === 'bar') {
-                    for (let i = 0; i < item.answers.length; i++) {
-                        options.xaxis.categories.push(item.answers[i].text);
-                        options.series[0].data.push(1 + i);
+                    if (item.chartsID === 'bar') {
+                        for (let i = 0; i < item.answers.length; i++) {
+                            options.xaxis.categories.push(item.answers[i].text);
+                            options.series[0].data.push(1 + i);
+                        }
+                        chosenOptions = options;
                     }
-                    chosenOptions = options;
-                }
-                if (item.chartsID === 'pie') {
-                    for (let i = 0; i < item.answers.length; i++) {
-                        pieOptions.labels.push(item.answers[i].text);
-                        pieOptions.series.push(1 + i);
+                    if (item.chartsID === 'pie') {
+                        for (let i = 0; i < item.answers.length; i++) {
+                            pieOptions.labels.push(item.answers[i].text);
+                            pieOptions.series.push(1 + i);
+                        }
+                        chosenOptions = pieOptions;
                     }
-                    chosenOptions = pieOptions;
-                }
-                if (item.chartsID === 'area') {
-                    for (let i = 0; i < item.answers.length; i++) {
-                        areaOptions.xaxis.categories.push(item.answers[i].text);
-                        areaOptions.series[0].data.push(1 + i);
+                    if (item.chartsID === 'area') {
+                        for (let i = 0; i < item.answers.length; i++) {
+                            areaOptions.xaxis.categories.push(item.answers[i].text);
+                            areaOptions.series[0].data.push(1 + i);
+                        }
+                        chosenOptions = areaOptions;
                     }
-                    chosenOptions = areaOptions;
-                }
-                if (item.chartsID === 'radar') {
-                    for (let i = 0; i < item.answers.length; i++) {
-                        radarOptions.xaxis.categories.push(item.answers[i].text);
-                        radarOptions.series[0].data.push(1 + i);
+                    if (item.chartsID === 'radar') {
+                        for (let i = 0; i < item.answers.length; i++) {
+                            radarOptions.xaxis.categories.push(item.answers[i].text);
+                            radarOptions.series[0].data.push(1 + i);
+                        }
+                        chosenOptions = radarOptions;
                     }
-                    chosenOptions = radarOptions;
-                }
-                if (item.chartsID === 'polar') {
-                    for (let i = 0; i < item.answers.length; i++) {
-                        polarOptions.labels.push(item.answers[i].text);
-                        polarOptions.series.push(1 + i);
+                    if (item.chartsID === 'polar') {
+                        for (let i = 0; i < item.answers.length; i++) {
+                            polarOptions.labels.push(item.answers[i].text);
+                            polarOptions.series.push(1 + i);
+                        }
+                        chosenOptions = polarOptions;
                     }
-                    chosenOptions = polarOptions;
+                    chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
+                    chart.render();
                 }
-                chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
-                chart.render();
-            }
-        } else {
-            if (item.id === id) {
-                document.querySelector('.slideTitle').innerHTML = "Вопрос"
-                let box = document.querySelector('#chart');
-                while (box.firstChild) {
-                    box.removeChild(box.firstChild)
+            } else {
+                if (item.id === id) {
+                    document.querySelector('.slideTitle').innerHTML = "Вопрос"
+                    let box = document.querySelector('#chart');
+                    while (box.firstChild) {
+                        box.removeChild(box.firstChild)
+                    }
                 }
             }
-        }
-    })
+        })
+    }
+
     clearFields();
 }
 

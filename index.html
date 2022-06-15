@@ -34,7 +34,7 @@
     </div>
     <div class="slide-main activeSlide">
         <div class="slideTitle">
-            Вопрос
+            Заголовок
         </div>
         <div class="slideGraph" id="chart">
 
@@ -43,9 +43,10 @@
     <div class="slide-edit">
         <form action="">
             <label class="questionTitle" for="question">
-                Ваш вопрос
+                Заголовок
             </label>
-            <input type="text" class="form-control" id="question" placeholder="Ваш вопрос...">
+            <input type="text" class="form-control" id="question" placeholder="Заголовок...">
+            <div class="category">Графики:</div>
             <div class="form-check radioBtn">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="bar" checked>
                 <label class="form-check-label" for="bar">
@@ -75,6 +76,16 @@
                 <label class="form-check-label" for="polar">
                     Полярная диаграмма
                 </label>
+            </div>
+            <div class="category">Контент:</div>
+            <div class="form-check radioBtn">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="image" onchange="doAlert(this)">
+                <label class="form-check-label" for="image">
+                    Загрузить картинку
+                </label>
+            </div>
+            <div class="upload">
+                <input class="form-control" type="file" name="pic" id="pic" accept="image/*" onchange="loadFile(event)">
             </div>
             <div class="options">
                 <div class="optionsTitle">

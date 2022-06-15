@@ -60,8 +60,10 @@ main {
     main .slide-main .slideGraph {
       display: flex;
       width: 100%;
-      justify-content: space-between;
+      justify-content: center;
       background: #ffffff; }
+      main .slide-main .slideGraph .slidePic img {
+        max-width: 300px; }
   main .slide-edit {
     font-family: Arial, serif;
     display: flex;
@@ -76,6 +78,8 @@ main {
       margin-top: 10px;
       border: 1px solid #000000;
       border-radius: 15px; }
+    main .slide-edit .category {
+      margin-top: 10px; }
     main .slide-edit .radioBtn {
       display: flex;
       align-items: center;
@@ -97,6 +101,9 @@ main {
         margin-bottom: 10px; }
         main .slide-edit .options .optionItems .optionItem {
           margin-top: 10px; }
+    main .slide-edit .upload {
+      display: none;
+      margin-top: 10px; }
   main .slide-menu {
     display: flex;
     flex-direction: column;

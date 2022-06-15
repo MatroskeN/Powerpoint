@@ -65,8 +65,13 @@ main{
     .slideGraph{
       display: flex;
       width: 100%;
-      justify-content: space-between;
+      justify-content: center;
       background: #ffffff;
+      .slidePic{
+        img{
+          max-width: 300px;
+        }
+      }
     }
   }
   .slide-edit{
@@ -85,6 +90,9 @@ main{
       margin-top: 10px;
       border: 1px solid #000000;
       border-radius: 15px;
+    }
+    .category{
+      margin-top: 10px;
     }
     .radioBtn{
       display: flex;
@@ -113,6 +121,10 @@ main{
           margin-top: 10px;
         }
       }
+    }
+    .upload{
+      display: none;
+      margin-top: 10px;
     }
   }
   .slide-menu{
