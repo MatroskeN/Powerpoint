@@ -163,6 +163,9 @@ $('input[type=radio]').on('click',function (){
 })
 
 let loadFile = function (event){
+    if (chart) {
+        chart.destroy();
+    }
     let slidePic = document.createElement('div');
     slidePic.className = 'slidePic';
     slidePic.innerHTML = '<img src="" id="output" alt="picture">'
