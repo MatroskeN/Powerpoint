@@ -1,7 +1,7 @@
 window.Backend = "http://localhost:8085"
 
 $('h1').on('click', function () {
-    window.location.replace("index.html");
+    window.location.replace("entry.html");
 })
 $('.authorization').on('click', function () {
     window.location.replace("authorization.html");
@@ -9,6 +9,26 @@ $('.authorization').on('click', function () {
 $('.registration').on('click', function () {
     window.location.replace("registration.html");
 })
+let itemId = 1;
+let existingPresentations = document.querySelectorAll('.presItem');
+renewPres();
+$('.create').on("click", function () {
+    itemId++;
+    let presItem = document.createElement('div');
+    presItem.className = 'presItem';
+    presItem.innerHTML = '<div class="window" data-id="'+itemId+'"></div><div class="title">Презентация №'+itemId+'</div>'
+    document.querySelector('.presList').appendChild(presItem);
+    renewPres();
+})
+
+function renewPres(){
+    existingPresentations = document.querySelectorAll('.presItem');
+    $(existingPresentations).on('click', function (){
+        console.log('her');
+        window.location.replace("index.html?"+itemId);
+    })
+}
+
 
 // Добавить опцию
 function addOption() {
@@ -18,9 +38,10 @@ function addOption() {
     document.querySelector('.optionItems').appendChild(option);
 }
 
-document.querySelector('.addOption').onclick = () => {
+$('.addOption').on('click', function (){
     addOption();
-}
+});
+
 
 // Получение презентации по id
 async function GetPresentation(presentationID) {
@@ -97,30 +118,34 @@ let index = 0;
 let activeSlideId;
 let chart;
 
+//<i class="gg-trash"></i>
 
 function addSlide() {
     let newGraph = new NewSLide(id);
     activeSlideId = id;
     let miniSlide = document.createElement('div');
     miniSlide.className = 'slideMini';
-    miniSlide.innerHTML = '<div class="info"><p class="number" data-id="' + id + '">' + id + '</p> <button class="remove" data-id="' + id + '"><i class="gg-trash"></i></button></div> <div class="pic"></div>'
+    miniSlide.innerHTML = '<div class="info"><p class="number" data-id="' + id + '">' + id + '</p> <button class="remove" data-id="' + id + '"></button></div> <div class="pic"></div>'
     document.querySelector('.slideList').appendChild(miniSlide);
     slideList[index] = newGraph;
     index++;
     id++;
     return newGraph;
 }
+if (window.location.href.indexOf("index") > -1){
+    addSlide();
+}
 
-addSlide();
 let existingSlides = document.querySelectorAll('.slideMini');
 
-document.querySelector('.addSlide').onclick = () => {
+$('.addSlide').on('click', function (){
     addSlide();
     renewSlides();
     rewriteContent(activeSlideId);
     clearFields();
-}
-const presentationId = 1;
+});
+
+let presentationId = 1;
 
 function doAlert(checkboxElem){
     console.log('change')
@@ -155,7 +180,8 @@ let loadFile = function (event){
     slideList[activeSlideId-1].question = document.querySelector('#question').value;
 }
 
-document.querySelector('.createGraph').onclick = () => {
+
+$('.createGraph').on('click', function (){
     let chosenOptions = '';
     let options = '';
     let pieOptions = '';
@@ -247,53 +273,53 @@ document.querySelector('.createGraph').onclick = () => {
             }
             optionsData = document.querySelectorAll('.optionItem');
             answers = [];
+            for (let i = 0; i < optionsData.length; i++) {
+                answers[i] = new NewAnswer();
+                answers[i].id = i;
+                answers[i].text = optionsData[i].querySelector('input').value;
+            }
+            if (document.querySelector('#bar').checked) {
                 for (let i = 0; i < optionsData.length; i++) {
-                    answers[i] = new NewAnswer();
-                    answers[i].id = i;
-                    answers[i].text = optionsData[i].querySelector('input').value;
+                    options.xaxis.categories.push(answers[i].text);
+                    options.series[0].data.push(1 + i);
                 }
-                if (document.querySelector('#bar').checked) {
-                    for (let i = 0; i < optionsData.length; i++) {
-                        options.xaxis.categories.push(answers[i].text);
-                        options.series[0].data.push(1 + i);
-                    }
-                    chosenOptions = options;
-                    chartType = 'bar';
+                chosenOptions = options;
+                chartType = 'bar';
+            }
+            if (document.querySelector('#pie').checked) {
+                for (let i = 0; i < optionsData.length; i++) {
+                    pieOptions.labels.push(answers[i].text);
+                    pieOptions.series.push(1 + i);
                 }
-                if (document.querySelector('#pie').checked) {
-                    for (let i = 0; i < optionsData.length; i++) {
-                        pieOptions.labels.push(answers[i].text);
-                        pieOptions.series.push(1 + i);
-                    }
-                    chosenOptions = pieOptions;
-                    chartType = 'pie';
+                chosenOptions = pieOptions;
+                chartType = 'pie';
+            }
+            if (document.querySelector('#area').checked) {
+                for (let i = 0; i < optionsData.length; i++) {
+                    areaOptions.xaxis.categories.push(answers[i].text);
+                    areaOptions.series[0].data.push(1 + i);
                 }
-                if (document.querySelector('#area').checked) {
-                    for (let i = 0; i < optionsData.length; i++) {
-                        areaOptions.xaxis.categories.push(answers[i].text);
-                        areaOptions.series[0].data.push(1 + i);
-                    }
-                    chosenOptions = areaOptions;
-                    chartType = 'area';
+                chosenOptions = areaOptions;
+                chartType = 'area';
+            }
+            if (document.querySelector('#radar').checked) {
+                for (let i = 0; i < optionsData.length; i++) {
+                    radarOptions.xaxis.categories.push(answers[i].text);
+                    radarOptions.series[0].data.push(1 + i);
                 }
-                if (document.querySelector('#radar').checked) {
-                    for (let i = 0; i < optionsData.length; i++) {
-                        radarOptions.xaxis.categories.push(answers[i].text);
-                        radarOptions.series[0].data.push(1 + i);
-                    }
-                    chosenOptions = radarOptions;
-                    chartType = 'radar';
+                chosenOptions = radarOptions;
+                chartType = 'radar';
+            }
+            if (document.querySelector('#polar').checked) {
+                for (let i = 0; i < optionsData.length; i++) {
+                    polarOptions.labels.push(answers[i].text);
+                    polarOptions.series.push(1 + i);
                 }
-                if (document.querySelector('#polar').checked) {
-                    for (let i = 0; i < optionsData.length; i++) {
-                        polarOptions.labels.push(answers[i].text);
-                        polarOptions.series.push(1 + i);
-                    }
-                    chosenOptions = polarOptions;
-                    chartType = 'polar';
-                }
-                chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
-                chart.render();
+                chosenOptions = polarOptions;
+                chartType = 'polar';
+            }
+            chart = new ApexCharts(document.querySelector('#chart'), chosenOptions);
+            chart.render();
             element.chartsID = chartType;
             element.answers = answers;
         }
@@ -310,7 +336,7 @@ document.querySelector('.createGraph').onclick = () => {
     SavePresentation(presentationId, activeSlideId, 'Презентация', slideList).then(r => {
         console.log(r);
     })
-}
+})
 
 
 function rewriteContent(id) {
