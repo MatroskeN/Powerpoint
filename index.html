@@ -46,62 +46,78 @@
                 Заголовок
             </label>
             <input type="text" class="form-control" id="question" placeholder="Заголовок...">
-            <div class="category">Графики:</div>
-            <div class="form-check radioBtn">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="bar" checked>
-                <label class="form-check-label" for="bar">
-                    Столбчатая диаграмма
-                </label>
+            <div class="choose">
+                <button type="button" class="category graphBtn btn btn-primary">Графики</button>
+                <button type="button" class="category contentBtn btn btn-secondary">Контент</button>
             </div>
-            <div class="form-check radioBtn">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="pie">
-                <label class="form-check-label" for="pie">
-                    Круговая диаграмма
-                </label>
-            </div>
-            <div class="form-check radioBtn">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="area">
-                <label class="form-check-label" for="area">
-                    Линейный график
-                </label>
-            </div>
-            <div class="form-check radioBtn">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="radar">
-                <label class="form-check-label" for="radar">
-                    Радиолокационная диаграмма
-                </label>
-            </div>
-            <div class="form-check radioBtn">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="polar">
-                <label class="form-check-label" for="polar">
-                    Полярная диаграмма
-                </label>
-            </div>
-            <div class="category">Контент:</div>
-            <div class="form-check radioBtn">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="image" onchange="doAlert(this)">
-                <label class="form-check-label" for="image">
-                    Загрузить картинку
-                </label>
-            </div>
-            <div class="upload">
-                <input class="form-control" type="file" name="pic" id="pic" accept="image/*" onchange="loadFile(event)">
-            </div>
-            <div class="options">
-                <div class="optionsTitle">
-                    Опции
-                </div>
-                <div class="optionItems">
-                    <div class="optionItem">
-                        <input class="form-control" type="text" placeholder="Вариант">
+            <div class="graphs">
+                <div class="form-check radioBtn">
+                    <div class="radioIcon bar activeIcon">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="bar" checked>
                     </div>
+                    <label class="form-check-label" for="bar">
+                        Столбчатая диаграмма
+                    </label>
                 </div>
-                <button type="button" class="btn btn-primary addOption">
-                    Добавить вариант
-                </button>
-                <button type="button" class="btn btn-primary createGraph">
-                    Готово
-                </button>
+                <div class="form-check radioBtn">
+                    <div class="radioIcon pie">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="pie">
+                    </div>
+                    <label class="form-check-label" for="pie">
+                        Круговая диаграмма
+                    </label>
+                </div>
+                <div class="form-check radioBtn">
+                    <div class="radioIcon area">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="area">
+                    </div>
+                    <label class="form-check-label" for="area">
+                        Линейный график
+                    </label>
+                </div>
+                <div class="form-check radioBtn">
+                    <div class="radioIcon radar">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="radar">
+                    </div>
+                    <label class="form-check-label" for="radar">
+                        Радиолокационная диаграмма
+                    </label>
+                </div>
+                <div class="form-check radioBtn">
+                    <div class="radioIcon polar">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="polar">
+                    </div>
+                    <label class="form-check-label" for="polar">
+                        Полярная диаграмма
+                    </label>
+                </div>
+                <div class="options">
+                    <div class="optionsTitle">
+                        Опции
+                    </div>
+                    <div class="optionItems">
+                        <div class="optionItem">
+                            <input class="form-control" type="text" placeholder="Вариант">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary addOption">
+                        Добавить вариант
+                    </button>
+                    <button type="button" class="btn btn-primary createGraph">
+                        Готово
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="form-check radioBtn">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="image" onchange="doAlert(this)">
+                    <label class="form-check-label" for="image">
+                        Загрузить картинку
+                    </label>
+                </div>
+                <div class="upload">
+                    <input class="form-control" type="file" name="pic" id="pic" accept="image/*" onchange="loadFile(event)">
+                </div>
             </div>
         </form>
     </div>

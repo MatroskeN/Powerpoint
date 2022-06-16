@@ -91,8 +91,12 @@ main{
       border: 1px solid #000000;
       border-radius: 15px;
     }
+    .choose{
+      display: flex;
+    }
     .category{
       margin-top: 10px;
+      margin-right: 10px;
     }
     .radioBtn{
       display: flex;
@@ -103,9 +107,41 @@ main{
         margin-left: 10px;
         cursor: pointer;
         margin-top: 3px;
+        transition: all 0.4s;
       }
-      input{
-        cursor: pointer;
+      .radioIcon{
+        position: relative;
+        width: 20px;
+        height: 20px;
+        transition: all 0.4s;
+        input{
+          visibility: hidden;
+          position: absolute;
+        }
+      }
+      .activeIcon{
+        width: 35px;
+        height: 35px;
+      }
+      .bar{
+        background: url("assets/line.png") no-repeat center;
+        background-size: 100%;
+      }
+      .pie{
+        background: url("assets/pie.png") no-repeat center;
+        background-size: 100%;
+      }
+      .area{
+        background: url("assets/area.png") no-repeat center;
+        background-size: 100%;
+      }
+      .radar{
+        background: url("assets/radar.png") no-repeat center;
+        background-size: 100%;
+      }
+      .polar{
+        background: url("assets/polar.png") no-repeat center;
+        background-size: 100%;
       }
     }
     .options{
@@ -122,8 +158,11 @@ main{
         }
       }
     }
-    .upload{
+    .content{
       display: none;
+    }
+    .upload{
+      display: block;
       margin-top: 10px;
     }
   }
@@ -202,7 +241,9 @@ main{
       flex-direction: column;
       justify-content: center;
       padding: 10px;
+      width: 165px;
       margin-right: 15px;
+      margin-bottom: 10px;
       background: #c4c4c4;
       border-radius: 10px;
       -webkit-box-shadow: 4px 4px 8px 1px rgba(69, 120, 201, 0.29);
@@ -218,6 +259,7 @@ main{
       .title{
         margin-top: 15px;
         font-family: Arial, sans-serif;
+        text-align: center;
       }
       &:hover{
         transform: scale(1.1);

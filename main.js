@@ -1,5 +1,18 @@
 window.Backend = "http://localhost:8085"
 
+let speech = 'i like to finger my sweet sweet ass';
+
+async function GetWordCloud(speech){
+    return new Promise(async (resolve, reject)=>{
+        await axios.post('https://quickchart.io/wordcloud?text='+speech)
+            .then((res) => resolve(res.data))
+            .catch((err) => reject(err))
+        console.log(resolve);
+    })
+}
+
+GetWordCloud(speech);
+
 $('h1').on('click', function () {
     window.location.replace("entry.html");
 })
@@ -147,19 +160,34 @@ $('.addSlide').on('click', function (){
 
 let presentationId = 1;
 
-function doAlert(checkboxElem){
-    console.log('change')
-    if (checkboxElem.checked){
-        document.querySelector('.options').style.display = 'none';
-        document.querySelector('.upload').style.display = 'flex';
-    }
-}
+// function doAlert(checkboxElem){
+//     console.log('change')
+//     if (checkboxElem.checked){
+//         document.querySelector('.options').style.display = 'none';
+//         document.querySelector('.upload').style.display = 'flex';
+//     }
+// }
 
 $('input[type=radio]').on('click',function (){
-    if ($(this).id !== 'image'){
-        document.querySelector('.options').style.display = 'block';
-        document.querySelector('.upload').style.display = 'none';
-    }
+    $('input[type=radio]').parent().removeClass('activeIcon');
+    $(this).parent().addClass('activeIcon');
+    label.style.color = 'blue';
+})
+
+$('.contentBtn').on('click', function (){
+    $(this).addClass('btn-primary');
+    $(this).removeClass('btn-secondary');
+    $('.graphBtn').addClass('btn-secondary').removeClass('btn-primary');
+    $('.graphs').hide();
+    $('.content').show();
+})
+
+$('.graphBtn').on('click', function (){
+    $(this).addClass('btn-primary');
+    $(this).removeClass('btn-secondary');
+    $('.contentBtn').addClass('btn-secondary').removeClass('btn-primary');
+    $('.graphs').show();
+    $('.content').hide();
 })
 
 let loadFile = function (event){
