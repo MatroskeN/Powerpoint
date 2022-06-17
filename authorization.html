@@ -11,40 +11,56 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<header>
-    <h1>
-        Авторизация
-    </h1>
-    <div class="buttons">
-        <button type="button" class="btn btn-primary authorization">
-            Авторизация
-        </button>
-        <button type="button" class="btn btn-primary registration">
-            Регистрация
-        </button>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <h1>Авторизация</h1>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-white main-link">Главная</a></li>
+            </ul>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2 authorization">Войти</button>
+                <button type="button" class="btn btn-warning registration">Регистрация</button>
+            </div>
+        </div>
     </div>
 </header>
-<main class="mainLogin">
-    <form class= 'loginForm' action="">
-        <div class="mb-3">
-            <label for="staticEmail" class="col-lg col-form-label">E-mail</label>
-            <div class="col">
-                <input type="text" class="form-control" id="staticEmail" placeholder="example@cock.com">
+<div class="wrapper">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <a href="#" class="main-link d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Мои презентации</span>
+        </a>
+        <hr>
+
+    </div>
+    <main class="mainLogin">
+        <form class= 'loginForm' action="">
+            <h2>Войдите в свой аккаунт</h2>
+            <div class="mb-3">
+                <label for="staticEmail" class="col-lg col-form-label">E-mail</label>
+                <div class="col">
+                    <input type="text" class="form-control" id="staticEmail" placeholder="example@cock.com">
+                </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="inputPassword" class="col-lg col-form-label">Пароль</label>
-            <div class="col-m-10">
-                <input type="password" class="form-control" id="inputPassword">
+            <div class="mb-3">
+                <label for="inputPassword" class="col-lg col-form-label">Пароль</label>
+                <div class="col-m-10">
+                    <input type="password" class="form-control" id="inputPassword">
+                </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-primary mb-3">
-                Войти
-            </button>
-        </div>
-    </form>
-</main>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary mb-3">
+                    Войти
+                </button>
+            </div>
+            <div class="no-account">
+                Нет аккаунта? <br>
+                <a target="_blank" href="registration.html">Создайте!</a>
+            </div>
+        </form>
+    </main>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

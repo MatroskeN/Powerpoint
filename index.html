@@ -11,22 +11,24 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<header>
-    <h1>
-        Презентация
-    </h1>
-    <div class="buttons">
-        <button type="button" class="btn btn-primary authorization">
-            Авторизация
-        </button>
-        <button type="button" class="btn btn-primary registration">
-            Регистрация
-        </button>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <h1>Презентация</h1>
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-white main-link">Главная</a></li>
+            </ul>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2 authorization">Войти</button>
+                <button type="button" class="btn btn-warning registration">Регистрация</button>
+            </div>
+        </div>
     </div>
 </header>
 <main>
     <div class="slide-menu">
-        <button type="button" class="btn btn-primary addSlide">
+        <button type="button" class="btn btn-dark addSlide">
             Добавить слайд
         </button>
         <div class="slideList">
@@ -47,7 +49,7 @@
             </label>
             <input type="text" class="form-control" id="question" placeholder="Заголовок...">
             <div class="choose">
-                <button type="button" class="category graphBtn btn btn-primary">Графики</button>
+                <button type="button" class="category graphBtn btn btn-dark">Графики</button>
                 <button type="button" class="category contentBtn btn btn-secondary">Контент</button>
             </div>
             <div class="graphs">
@@ -100,10 +102,10 @@
                             <input class="form-control" type="text" placeholder="Вариант">
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary addOption">
+                    <button type="button" class="btn btn-dark addOption">
                         Добавить вариант
                     </button>
-                    <button type="button" class="btn btn-primary createGraph">
+                    <button type="button" class="btn btn-dark createGraph">
                         Готово
                     </button>
                 </div>

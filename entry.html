@@ -11,34 +11,42 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<header>
-    <h1>
-        Главная
-    </h1>
-    <div class="buttons">
-        <button type="button" class="btn btn-primary authorization">
-            Авторизация
-        </button>
-        <button type="button" class="btn btn-primary registration">
-            Регистрация
-        </button>
-    </div>
-</header>
-<main class="entry">
-    <button type="button" class="btn btn-secondary create">
-        Создать презентацию
-    </button>
-    <div class="presList">
-        <div class="presItem">
-            <div class="window">
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 text-secondary main-link">Главная</a></li>
+            </ul>
 
-            </div>
-            <div class="title">
-                Презентация №1
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-light me-2 authorization">Войти</button>
+                <button type="button" class="btn btn-warning registration">Регистрация</button>
             </div>
         </div>
     </div>
-</main>
+</header>
+<div class="wrapper">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <a href="#" class="main-link d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <span class="fs-4">Мои презентации</span>
+        </a>
+        <hr>
+
+    </div>
+    <main class="entry">
+        <button type="button" class="btn btn-secondary create">
+            Создать презентацию
+        </button>
+        <div class="presList">
+            <div class="presItem">
+                <img src="assets/pres.svg" alt="pres" class="window" data-id="1">
+                <div class="title">
+                    Презентация №1
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

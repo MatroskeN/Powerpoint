@@ -13,7 +13,7 @@ async function GetWordCloud(speech){
 
 GetWordCloud(speech);
 
-$('h1').on('click', function () {
+$('.main-link').on('click', function () {
     window.location.replace("entry.html");
 })
 $('.authorization').on('click', function () {
@@ -29,16 +29,22 @@ $('.create').on("click", function () {
     itemId++;
     let presItem = document.createElement('div');
     presItem.className = 'presItem';
-    presItem.innerHTML = '<div class="window" data-id="'+itemId+'"></div><div class="title">Презентация №'+itemId+'</div>'
+    presItem.innerHTML = '<img src="assets/pres.svg" alt="pres" class="window" data-id="'+itemId+'"><div class="title">Презентация №'+itemId+'</div>'
     document.querySelector('.presList').appendChild(presItem);
     renewPres();
 })
 
 function renewPres(){
     existingPresentations = document.querySelectorAll('.presItem');
-    $(existingPresentations).on('click', function (){
-        console.log('her');
-        window.location.replace("index.html?"+itemId);
+    // $(existingPresentations).on('click', function (){
+    //     console.log('her');
+    //     window.location.replace("index.html?"+itemId);
+    // })
+    existingPresentations.forEach( element => {
+        $(element).on('click', function (){
+            let id = $(this).find('img').attr('data-id');
+            window.location.replace('index.html?'+id);
+        })
     })
 }
 
@@ -175,17 +181,17 @@ $('input[type=radio]').on('click',function (){
 })
 
 $('.contentBtn').on('click', function (){
-    $(this).addClass('btn-primary');
+    $(this).addClass('btn-dark');
     $(this).removeClass('btn-secondary');
-    $('.graphBtn').addClass('btn-secondary').removeClass('btn-primary');
+    $('.graphBtn').addClass('btn-secondary').removeClass('btn-dark');
     $('.graphs').hide();
     $('.content').show();
 })
 
 $('.graphBtn').on('click', function (){
-    $(this).addClass('btn-primary');
+    $(this).addClass('btn-dark');
     $(this).removeClass('btn-secondary');
-    $('.contentBtn').addClass('btn-secondary').removeClass('btn-primary');
+    $('.contentBtn').addClass('btn-secondary').removeClass('btn-dark');
     $('.graphs').show();
     $('.content').hide();
 })
