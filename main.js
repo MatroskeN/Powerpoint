@@ -41,8 +41,8 @@ function renewPres(){
     //     window.location.replace("index.html?"+itemId);
     // })
     existingPresentations.forEach( element => {
-        $(element).on('click', function (){
-            let id = $(this).find('img').attr('data-id');
+        let id = $(this).find('img').attr('data-id');
+        $(element).find('.title').on('click', function (){
             window.location.replace('index.html?'+id);
         })
     })
@@ -165,14 +165,6 @@ $('.addSlide').on('click', function (){
 });
 
 let presentationId = 1;
-
-// function doAlert(checkboxElem){
-//     console.log('change')
-//     if (checkboxElem.checked){
-//         document.querySelector('.options').style.display = 'none';
-//         document.querySelector('.upload').style.display = 'flex';
-//     }
-// }
 
 $('input[type=radio]').on('click',function (){
     $('input[type=radio]').parent().removeClass('activeIcon');

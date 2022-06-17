@@ -261,21 +261,35 @@ main{
       width: 100%;
       margin-right: 15px;
       margin-bottom: 10px;
-      background: #6c757d;
+      background: rgba(108, 117, 125, 0.6);
       border-radius: 10px;
       -webkit-box-shadow: 4px 4px 8px 1px rgba(69, 120, 201, 0.29);
       -moz-box-shadow: 4px 4px 8px 1px rgba(69, 120, 201, 0.29);
       box-shadow: 4px 4px 8px 1px rgba(69, 120, 201, 0.29);
       transition: all 0.4s;
-      cursor: pointer;
       .window{
         width: 100px;
         margin-right: 10px;
       }
+      .block{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        button{
+          background: transparent;
+          border: none;
+          outline: none;
+          width: fit-content;
+        }
+      }
       .title{
         font-family: Arial, sans-serif;
         text-align: center;
-        color: #FFFFFF;
+        color: #000000;
+        cursor: pointer;
+      }
+      .info{
+        margin-left: auto;
       }
     }
   }
